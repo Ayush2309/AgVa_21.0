@@ -995,6 +995,8 @@ class Ventilator():
 			if(P_plat - first_max > 2):
 			    motor_factor = motor_factor + 0.01
 		    toggle_switch = str(toggle())
+		    if(EHold == '1'):
+			toggle_switch ='1'
 #		    print("MOTOR FACTOR ISSSSSSSSSSSSSSSSSSSSSSS")
 #		    print(motor_factor)
 #		    print(first_max)
@@ -2283,6 +2285,8 @@ class Ventilator():
 		    loop = 0
 		#    motor_1.ChangeDutyCycle(peep)
 		    toggle_switch = str(toggle())
+		    if(EHold == '1'):
+			toggle_switch ='1'
 		    sleep(0.01)
 	#	    GPIO.output(35, GPIO.HIGH) # low level triggered relay
 		    if(toggle_switch == "0"):
@@ -2893,6 +2897,8 @@ class Ventilator():
 		    else:
 			ser.write("ACK70")
 		    toggle_switch = str(toggle())
+		    if(EHold == '1'):
+			toggle_switch ='1'
 		    sleep(0.01)
 	#	    GPIO.output(35, GPIO.HIGH) # low level triggered relay
 		    if(toggle_switch == "0"):
@@ -3600,6 +3606,8 @@ class Ventilator():
 		    loop = 0
 		#    motor_1.ChangeDutyCycle(peep)
 		    toggle_switch = str(toggle())
+		    if(EHold == '1'):
+			toggle_switch ='1'
 		    sleep(0.01)
 		#    GPIO.output(35, GPIO.HIGH) # low level triggered relay
 		    try:
@@ -4261,6 +4269,8 @@ class Ventilator():
 		    else:
 			ser.write("ACK70")
 		    toggle_switch = str(toggle())
+		    if(EHold == '1'):
+			toggle_switch ='1'
 	#	    print("the toffle switch in here issssssssssssssssssssssssssss " + toggle_switch)
 		#    motor_1.ChangeDutyCycle(peep)
 		    sleep(0.01)
@@ -6115,6 +6125,8 @@ class Ventilator():
 		    else:
 			ser.write("ACK70")
 		    toggle_switch = str(toggle())
+		    if(EHold == '1'):
+			toggle_switch ='1'
 	#	    print("the toffle switch in here issssssssssssssssssssssssssss " + toggle_switch)
 		#    motor_1.ChangeDutyCycle(peep)
 		    sleep(0.01)
@@ -8577,6 +8589,8 @@ class Ventilator():
 			ser.write("ACK70")
 		    loop = 0
 		    toggle_switch = str(toggle())
+		    if(EHold == '1'):
+			toggle_switch ='1'
 	#	    print("the toffle switch in here issssssssssssssssssssssssssss " + toggle_switch)
 		#    motor_1.ChangeDutyCycle(peep)
 		    sleep(0.01)
@@ -9284,6 +9298,9 @@ class Ventilator():
 		    else:
 			ser.write("ACK70")
 		    toggle_switch = str(toggle())
+		    if(EHold == '1'):
+			toggle_switch ='1'
+
 	#	    print("the toffle switch in here issssssssssssssssssssssssssss " + toggle_switch)
 		#    motor_1.ChangeDutyCycle(peep)
 		    sleep(0.01)
