@@ -693,6 +693,7 @@ class Ventilator():
 		prev_mode = 12
 		ABP_flag = 0
 #		print('we are in PC_IMV mode')
+		hold_check()
 		data= self.read_data()
 #		print('mode is')
 #		print(data)
@@ -1202,7 +1203,7 @@ class Ventilator():
            		    volume=self.Flow()
 			    volFlow_rate=self.rate()
 			    diff = self.SDP_pressure()
-			if(toggle_switch == "1" and indiff <= peep_val):
+			if(toggle_switch == "1" and sol_flag == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    sleep(0.1)
 			    sol_flag = 1
@@ -1267,12 +1268,12 @@ class Ventilator():
 		    TITOT=(time_elapsed_inhale/(time_elapsed_inhale + time_elapsed_exhale + TOT_last))
 #		    if(len(exp_press_array) > 10):
 #		        peep_val_send =  exp_press_array[len(exp_press_array) - 3]
-		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 98 and peep_open < 98):
+		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 98 and peep_open < 98 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep + 2
 			else:
 			    peep_open = peep_open + 2
-		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0):
+		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep - 1
 			else:
@@ -2050,6 +2051,7 @@ class Ventilator():
 		prev_mode = 11
 		print('we are in PC_CMV mode')
 		data= self.read_data()
+		hold_check()
 		print(data)
 		if(data == 1):
 		    break;
@@ -2527,12 +2529,12 @@ class Ventilator():
 		    TITOT=(time_elapsed_inhale/(time_elapsed_inhale + time_elapsed_exhale + TOT_last))
 #		    print('peak volume flow rate exhale')
 #		    print(volume_peak_exhale)
-		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100):
+		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep + 2
 			else:
 			    peep_open = peep_open + 2
-		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open  > 0):
+		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open  > 0 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep - 1
 			else:
@@ -2642,6 +2644,7 @@ class Ventilator():
 		prev_mode = 21
 #		print('we are in VC_CMV mode')
 		data= self.read_data()
+		hold_check()
 #		print(data)
 		if(data == 1):
 		    break;
@@ -3184,12 +3187,12 @@ class Ventilator():
 		    TITOT=(time_elapsed_inhale/(time_elapsed_inhale + time_elapsed_exhale + TOT_last))
 #		    print('peak volume flow rate exhale')
 #		    print(volume_peak_exhale)
-		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100):
+		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep + 2
 			else:
 			    peep_open = peep_open + 2
-		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0):
+		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep - 1
 			else:
@@ -3853,13 +3856,13 @@ class Ventilator():
 		    TITOT=(time_elapsed_inhale/(time_elapsed_inhale + time_elapsed_exhale + TOT_last))
 #		    if(len(exp_press_array) > 10):
 #		        peep_val_send =  exp_press_array[len(exp_press_array) - 3]
-		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100):
+		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep + 2
 			else:
 			    peep_open = peep_open + 2
 		    #
-		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0):
+		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep - 1
 			else:
@@ -3976,6 +3979,7 @@ class Ventilator():
 		print('we are in ACV mode')
 		data= self.read_data()
 		print(data)
+		hold_check()
 		if(data == 1):
 		    print("breaking the cuircuit in hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
 		    break;
@@ -4559,12 +4563,12 @@ class Ventilator():
 		    TITOT=(time_elapsed_inhale/(time_elapsed_inhale + time_elapsed_exhale + TOT_last))
 #		    print('peak volume flow rate exhale')
 #		    print(volume_peak_exhale)
-		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100):
+		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep + 2
 			else:
 			    peep_open = peep_open + 2
-		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0):
+		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep - 1
 			else:
@@ -5826,6 +5830,7 @@ class Ventilator():
 #		print('we are in AIVENT mode')
 		data= self.read_data()
 #		print(data)
+		hold_check()
 		if(data == 1):
 		    print("breaking the cuircuit in hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
 		    break;
@@ -6192,9 +6197,9 @@ class Ventilator():
 		    if(pump_pressure > 95):
 			pump_pressure = 95
 #
-		    if(patient_status == 1 and peep_val_send < peep_val and peep < 90):
+		    if(patient_status == 1 and peep_val_send < peep_val and peep < 90 and toggle_switch == '0'):
 			peep = peep + 2
-		    elif(patient_status == 1 and peep_val_send > peep_val and peep > 5 and peep < 90):
+		    elif(patient_status == 1 and peep_val_send > peep_val and peep > 5 and peep < 90 and toggle_switch == '0'):
 			peep = peep - 1
 			print("reducing the peeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeep")
 		    print("Diag peep is " + str(peep))
@@ -6416,12 +6421,12 @@ class Ventilator():
 		    TITOT=(time_elapsed_inhale/(time_elapsed_inhale + time_elapsed_exhale + TOT_last))
 #		    if(len(exp_press_array) > 10):
 #			peep_val_send =  exp_press_array[len(exp_press_array) - 3]
-		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100):
+		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep + 2
 			else:
 			    peep_open = peep_open + 2
-		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0):
+		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep - 1
 			else:
@@ -8285,6 +8290,7 @@ class Ventilator():
 		print('we are in VC_IMV mode')
 		data= self.read_data()
 		print(data)
+		hold_check()
 		if(data == 1):
 		    print("breaking the cuircuit in hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
 		    break;
@@ -8650,9 +8656,9 @@ class Ventilator():
 			P_plat = indiff
 		    if(pump_pressure > 95):
 			pump_pressure = 95
-		    if(patient_status == 1 and peep_val_send < peep_val and peep < 90 and peep > 5):
+		    if(patient_status == 1 and peep_val_send < peep_val and peep < 90 and peep > 5 and toggle_switch == '0'):
 			peep = peep + 2
-		    elif(patient_status == 1 and peep_val_send > peep_val and peep > 1 and peep < 90):
+		    elif(patient_status == 1 and peep_val_send > peep_val and peep > 1 and peep < 90 and toggle_switch == '0') :
 			peep = peep - 1
 			print("reducing the peeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeep")
 		    print("Diagnostics")
@@ -8868,12 +8874,12 @@ class Ventilator():
 		    TITOT=(time_elapsed_inhale/(time_elapsed_inhale + time_elapsed_exhale + TOT_last))
 #		    if(len(exp_press_array) > 10):
 #		        peep_val_send =  exp_press_array[len(exp_press_array) - 3]
-		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100):
+		    if(int(peep_val_send) <= peep_val and patient_status == 1 and peep < 100 and peep_open < 100 and toggle_switch == '0'):
 			if(toggle_switch == "1"):
 			    peep = peep + 2
 			else:
 			    peep_open = peep_open + 2
-		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0):
+		    if(int(peep_val_send) > peep_val and patient_status == 1 and peep > 0 and peep_open > 0 and toggle_switch == '0') :
 			if(toggle_switch == "1"):
 			    peep = peep - 1
 			else:
@@ -9517,7 +9523,7 @@ class Ventilator():
  #                       exp_flow_array.append(exp_flow)
 			indiff = self.ABP_pressure()
 			exp_press_array.append(indiff)
-			if(toggle_switch == "1"  and indiff <= peep_val):
+			if(toggle_switch == "1"  and sol_flag == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    sol_flag  = 1
 			    sleep(0.1)
