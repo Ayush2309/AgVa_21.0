@@ -16,6 +16,10 @@ rise_time = 0
 rise_flag = '0'
 primitive_inhale_time = 2.0
 #-----------------------------------------
+IHold = '0'
+EHold = '0'
+IH_time = 0.0
+EH_time = 0.0
 change_setting = '0'
 trigflow_comp = 0
 comp_flag = '0'
@@ -8599,7 +8603,7 @@ class Ventilator():
 #--------------------------------------------------------
 
     def VCV(self):
-        global exp_flow_array,exp_press_array,peep,peep_open,time_elapsed_exhale_flow,patient_trigger_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,leak_comp_flag,running_avg,trigflow_comp, comp_flag,volume_comp,inhale_loop,pump_pressure_array,P_plat_array,compliance,compliance_array,toggle_switch,peep_open,loop,peep,peep_pwm,P_plat,P_plat_high,exhale_time_last, TOT_last,TITOT,P_plat_low,ABP_flag,pressure_count,peep_count,volume_count, SDP_flag,patient_set,flow_plat,ratio_set,patient_status,pump_pressure,pump_pressure_low, pump_pressure_high,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,P_plat_value,peep_hole, peep_val,data,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
+        global IH_time, EH_time, IHold, EHold,exp_flow_array,exp_press_array,peep,peep_open,time_elapsed_exhale_flow,patient_trigger_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,leak_comp_flag,running_avg,trigflow_comp, comp_flag,volume_comp,inhale_loop,pump_pressure_array,P_plat_array,compliance,compliance_array,toggle_switch,peep_open,loop,peep,peep_pwm,P_plat,P_plat_high,exhale_time_last, TOT_last,TITOT,P_plat_low,ABP_flag,pressure_count,peep_count,volume_count, SDP_flag,patient_set,flow_plat,ratio_set,patient_status,pump_pressure,pump_pressure_low, pump_pressure_high,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,P_plat_value,peep_hole, peep_val,data,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
         thread_mode_status = True
 	time_elapsed_exhale_flow = 0
 	pressure_low_count = 0
