@@ -754,6 +754,7 @@ class Ventilator():
                 if(flow>trigflow_comp or (current_time-start_time)>cycle_time):
 		    RR_time=current_time-start_time
 		    patient_trigger_flow = flow
+		    GPIO.output(33, GPIO.LOW)
 		    GPIO.output(35,GPIO.LOW)
 		    volume = 0
 		    leak_comp_flag = leak_comp()
@@ -926,6 +927,27 @@ class Ventilator():
 			VTi_volume = max(volume,VTi_volume)
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
+		    if(IHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("entering inspiratory hold")
+			print(IH_time)
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < IH_time):
+			    print(sending_time)
+			    indiff= self.ABP_pressure()
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_inhalation =('A@' + str(round(indiff,2)) + ','+str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(trigger) + '#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    IHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 		    if(indiff >= (P_plat+3)):
 			pressure_count = pressure_count +1
 			if(pressure_count >= 3):
@@ -981,9 +1003,9 @@ class Ventilator():
 			sol.ChangeDutyCycle(0)
 		    if(toggle_switch == "1"):
 #			print("got in the 2nd statement")
-			GPIO.output(35, GPIO.HIGH)
-		        motor_1.ChangeDutyCycle(0)
-			sol.ChangeDutyCycle(100)
+		#	GPIO.output(35, GPIO.HIGH)
+		        motor_1.ChangeDutyCycle(peep)
+			sol.ChangeDutyCycle(0)
 		    try:
 		        Pmean= sum(Pmean_array)/len(Pmean_array)
 		    except:
@@ -1142,6 +1164,9 @@ class Ventilator():
 				print('BT exhalation error')
 			    send_last_time = time()
 			sending_time = w- send_last_time
+		        if(toggle_switch == "1" and indiff <= peep_val):
+                            sol.ChangeDutyCycle(100)
+			    sleep(0.1)
 #			print('packet exhalation size  is')
 #			print(volFlow_rate)
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
@@ -1152,10 +1177,11 @@ class Ventilator():
                     time_elapsed_exhale=0.0
                     diff=self.SDP_pressure()
 		    indiff = self.ABP_pressure()
-#
+
 		    start_time=current_time
-		    if(toggle_switch == "1" and volFlow_rate <= (volume_peak_exhale * 0.05) and indiff <= peep_val):
+		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
+			sleep(0.1)
 #		    print("Time elapsed exhale  " + str(time_elapsed_exhale))
 #		    print("ABP                  " + str(indiff))
 #		    print("SDP                  " + str(diff))
@@ -1176,9 +1202,9 @@ class Ventilator():
            		    volume=self.Flow()
 			    volFlow_rate=self.rate()
 			    diff = self.SDP_pressure()
-			if(toggle_switch == "1" and volFlow_rate <= (volume_peak_exhale*0.05) and indiff <= peep_val and sol_flag == 0):
+			if(toggle_switch == "1" and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
-	#		    sleep(0.3)
+			    sleep(0.1)
 			    sol_flag = 1
  			if(volFlow_rate < -5):
  			    time_elapsed_exhale_flow = time_elapsed_exhale
@@ -1194,6 +1220,26 @@ class Ventilator():
 			sending_time =time() - send_last_time 
                         start_time=current_time
 #                    print("CE time is ....." + str(time() - new_time ))
+		    if(EHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("Entering expiratory hold")
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < EH_time):
+			    indiff= self.ABP_pressure()
+			    print(time() - instant_time)
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    EHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 		    if(time_elapsed_exhale<((cycle_time-inhale_time)-0.4)):
 		        print("TE condition :    " + str(time_elapsed_exhale))
 		    if(diff <= 0 or indiff >(((peak_insp_pressure - peep_val)/3 ) + peep_val)):
