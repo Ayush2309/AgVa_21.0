@@ -650,7 +650,7 @@ class Ventilator():
     #-------------------------------------------------
     # Pressure Control Intermitent Mode of Ventilation
     def PC_IMV(self):
-        global exp_flow_array, exp_press_array , peep,peep_open,rise_flag,rise_time,inhale_array,motor_factor,time_elapsed_inhale_flow,time_elapsed_exhale_flow,time_elapsed_inhale,plataeu_pressure,patient_trigger_flow,pressure_low_count,leak_comp_flag,running_avg ,comp_flag,trigflow_comp,back_backup,inhale_loop,toggle_switch,loop,peep,patient_set,exhale_time_last,TOT_last,ABP_flag,TITOT,pressure_count,peep_count, SDP_flag,flow_plat,indiff,patient_status,pump_pressure,pump_pressure_low,pump_pressure_high,ratio_set,time_error_set,thread_mode_status,time_error, time_error_last,ABP_flag,P_plat_value,prev_mode,data,ratio,RR_time,indiff,peep_val, peep_hole, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
+        global IH_time, EH_time, IHold, EHold,exp_flow_array, exp_press_array , peep,peep_open,rise_flag,rise_time,inhale_array,motor_factor,time_elapsed_inhale_flow,time_elapsed_exhale_flow,time_elapsed_inhale,plataeu_pressure,patient_trigger_flow,pressure_low_count,leak_comp_flag,running_avg ,comp_flag,trigflow_comp,back_backup,inhale_loop,toggle_switch,loop,peep,patient_set,exhale_time_last,TOT_last,ABP_flag,TITOT,pressure_count,peep_count, SDP_flag,flow_plat,indiff,patient_status,pump_pressure,pump_pressure_low,pump_pressure_high,ratio_set,time_error_set,thread_mode_status,time_error, time_error_last,ABP_flag,P_plat_value,prev_mode,data,ratio,RR_time,indiff,peep_val, peep_hole, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
         thread_mode_status = True
 	inhale_array = []
 	motor_factor = 0.5
@@ -1965,7 +1965,7 @@ class Ventilator():
             return
 
     def PC_CMV(self):
-	global exp_flow_array,exp_press_array,peep,peep_open,time_elapsed_exhale_flow ,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,inhale_loop,toggle_switch,loop,peep,patient_set,exhale_time_last, TOT_last,flow_plat,TITOT,ABP_flag,peep_count,pressure_count, SDP_flag,pump_pressure_low,patient_status,pump_pressure, pump_pressure_high,ratio_set,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,data,P_plat_value,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
+	global IH_time, EH_time, IHold, EHold,exp_flow_array,exp_press_array,peep,peep_open,time_elapsed_exhale_flow ,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,inhale_loop,toggle_switch,loop,peep,patient_set,exhale_time_last, TOT_last,flow_plat,TITOT,ABP_flag,peep_count,pressure_count, SDP_flag,pump_pressure_low,patient_status,pump_pressure, pump_pressure_high,ratio_set,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,data,P_plat_value,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
         volume=0
 	time_elapsed_exhale_flow = 0
 	rise_time = 0
@@ -2508,7 +2508,7 @@ class Ventilator():
 	    return
 
     def VC_CMV(self):
-	global exp_press_array,exp_flow_array,peep,peep_open,time_elapsed_exhale_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,volume_comp,inhale_loop,pump_pressure_array,P_plat_array,compliance,compliance_array,toggle_switch,loop,peep,P_plat,exhale_time_last, TOT_last,patient_set,TITOT,P_plat_high,pressure_count,peep_count,volume_count, ABP_flag, SDP_flag, P_plat_low,flow_plat,ratio_set,pump_pressure,pump_pressure_high,pump_pressure_low,patient_status,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,data,P_plat_value,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
+	global IH_time, EH_time, IHold, EHold,exp_press_array,exp_flow_array,peep,peep_open,time_elapsed_exhale_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,volume_comp,inhale_loop,pump_pressure_array,P_plat_array,compliance,compliance_array,toggle_switch,loop,peep,P_plat,exhale_time_last, TOT_last,patient_set,TITOT,P_plat_high,pressure_count,peep_count,volume_count, ABP_flag, SDP_flag, P_plat_low,flow_plat,ratio_set,pump_pressure,pump_pressure_high,pump_pressure_low,patient_status,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,data,P_plat_value,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
         volume=0
 	time_elapsed_exhale_flow = 0
 	rise_time = 0
@@ -3122,7 +3122,7 @@ class Ventilator():
 
     #------------------------------------------------
     def PSV(self):
-        global exp_press_array,exp_flow_array,peep,peep_open,time_elapsed_exhale_flow,patient_trigger_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,leak_comp_flag,running_avg, trigflow_comp, comp_flag,inhale_loop,toggle_switch,loop,patient_set,TITOT,exhale_time_last, TOT_last,patient_status,pressure_count,peep_count, ABP_flag, SDP_flag, pump_pressure_high, pump_pressure_low, pump_pressure,flow_plat,ratio_set,time_error_set,thread_mode_status,ABP_flag,time_error, time_error_last,P_plat_value,prev_mode,data,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
+        global IH_time, EH_time, IHold, EHold,exp_press_array,exp_flow_array,peep,peep_open,time_elapsed_exhale_flow,patient_trigger_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,leak_comp_flag,running_avg, trigflow_comp, comp_flag,inhale_loop,toggle_switch,loop,patient_set,TITOT,exhale_time_last, TOT_last,patient_status,pressure_count,peep_count, ABP_flag, SDP_flag, pump_pressure_high, pump_pressure_low, pump_pressure,flow_plat,ratio_set,time_error_set,thread_mode_status,ABP_flag,time_error, time_error_last,P_plat_value,prev_mode,data,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
         thread_mode_status = True
 	time_elapsed_exhale_flow = 0
 	rise_time = 0
@@ -3747,7 +3747,7 @@ class Ventilator():
 
 #-----------------------------------------------------------
     def ACV(self):
-        global exp_press_array,exp_flow_array,peep,peep_open,time_elapsed_exhale_flow,patient_trigger_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,leak_comp_flag,running_avg,trigflow_comp, comp_flag,volume_comp,inhale_loop,pump_pressure_array,P_plat_array,compliance,compliance_array,toggle_switch,peep_open,loop,peep,peep_pwm,P_plat,P_plat_high,exhale_time_last, TOT_last,TITOT,P_plat_low,ABP_flag,pressure_count,peep_count,volume_count, SDP_flag,patient_set,flow_plat,ratio_set,patient_status,pump_pressure,pump_pressure_low, pump_pressure_high,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,P_plat_value,peep_hole, peep_val,data,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
+        global IH_time, EH_time, IHold, EHold,exp_press_array,exp_flow_array,peep,peep_open,time_elapsed_exhale_flow,patient_trigger_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,leak_comp_flag,running_avg,trigflow_comp, comp_flag,volume_comp,inhale_loop,pump_pressure_array,P_plat_array,compliance,compliance_array,toggle_switch,peep_open,loop,peep,peep_pwm,P_plat,P_plat_high,exhale_time_last, TOT_last,TITOT,P_plat_low,ABP_flag,pressure_count,peep_count,volume_count, SDP_flag,patient_set,flow_plat,ratio_set,patient_status,pump_pressure,pump_pressure_low, pump_pressure_high,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,P_plat_value,peep_hole, peep_val,data,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
         thread_mode_status = True
 	time_elapsed_exhale_flow = 0
 	pressure_low_count = 0
@@ -5552,7 +5552,7 @@ class Ventilator():
             return
 #------------------------------------------------------
     def AIVENT(self):
-        global exp_press_array,exp_flow_array,peep,peep_open,time_elapsed_exhale_flow,patient_trigger_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,leak_comp_flag,running_avg, trigflow_comp, comp_flag,volume_comp,inhale_loop,pump_pressure_array,P_plat_array,compliance,compliance_array,toggle_switch,peep_open,loop,peep,peep_pwm,P_plat,P_plat_high,exhale_time_last, TOT_last,TITOT,P_plat_low,ABP_flag,pressure_count,peep_count,volume_count, SDP_flag,patient_set,flow_plat,ratio_set,patient_status,pump_pressure,pump_pressure_low, pump_pressure_high,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,P_plat_value,peep_hole, peep_val,data,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
+        global IH_time, EH_time, IHold, EHold,exp_press_array,exp_flow_array,peep,peep_open,time_elapsed_exhale_flow,patient_trigger_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,leak_comp_flag,running_avg, trigflow_comp, comp_flag,volume_comp,inhale_loop,pump_pressure_array,P_plat_array,compliance,compliance_array,toggle_switch,peep_open,loop,peep,peep_pwm,P_plat,P_plat_high,exhale_time_last, TOT_last,TITOT,P_plat_low,ABP_flag,pressure_count,peep_count,volume_count, SDP_flag,patient_set,flow_plat,ratio_set,patient_status,pump_pressure,pump_pressure_low, pump_pressure_high,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,P_plat_value,peep_hole, peep_val,data,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
         thread_mode_status = True
 	time_elapsed_exhale_flow = 0
 	patient_trigger_flow = 0
@@ -7965,7 +7965,7 @@ class Ventilator():
 #-----------------------------------------------------------
 #--------------------------------------------------------------------
     def PRVC(self):
-        global exp_press_array,exp_flow_array,peep,peep_open,time_elapsed_exhale_flow,patient_trigger_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,leak_comp_flag,running_avg,trigflow_comp, comp_flag,volume_comp,inhale_loop,pump_pressure_array,P_plat_array,compliance,compliance_array,toggle_switch,peep_open,loop,peep,peep_pwm,P_plat,P_plat_high,exhale_time_last, TOT_last,TITOT,P_plat_low,ABP_flag,pressure_count,peep_count,volume_count, SDP_flag,patient_set,flow_plat,ratio_set,patient_status,pump_pressure,pump_pressure_low, pump_pressure_high,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,P_plat_value,peep_hole, peep_val,data,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
+        global IH_time, EH_time, IHold, EHold,exp_press_array,exp_flow_array,peep,peep_open,time_elapsed_exhale_flow,patient_trigger_flow,rise_time, rise_flag,inhale_array,motor_factor,pressure_low_count,leak_comp_flag,running_avg,trigflow_comp, comp_flag,volume_comp,inhale_loop,pump_pressure_array,P_plat_array,compliance,compliance_array,toggle_switch,peep_open,loop,peep,peep_pwm,P_plat,P_plat_high,exhale_time_last, TOT_last,TITOT,P_plat_low,ABP_flag,pressure_count,peep_count,volume_count, SDP_flag,patient_set,flow_plat,ratio_set,patient_status,pump_pressure,pump_pressure_low, pump_pressure_high,time_error_set,thread_mode_status,time_error, time_error_last,prev_mode,P_plat_value,peep_hole, peep_val,data,ratio,RR_time,indiff, RR, BPM, MVi_array, MVi,volume, volume_peak_inhale, trigger, max_value, volume_peak_exhale, MVe_array, MVe,clock_t2
         thread_mode_status = True
 	time_elapsed_exhale_flow = 0
 	rise_time = 0
