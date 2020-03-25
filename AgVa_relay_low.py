@@ -1284,6 +1284,7 @@ class Ventilator():
 				    print('BT error send Inhalation')
 			        send_last_time= time()
 			    sending_time=time() - send_last_time
+			peep_val_send = indiff
 		    EHold = '0'
 		    GPIO.output(33, GPIO.LOW)
 		    if(time_elapsed_exhale<((cycle_time-inhale_time)-0.4)):
@@ -2607,6 +2608,7 @@ class Ventilator():
 				    print('BT error send Inhalation')
 			        send_last_time= time()
 			    sending_time=time() - send_last_time
+			peep_val_send = indiff
 		    EHold = '0'
 		    GPIO.output(33, GPIO.LOW)
 		    flag=0
@@ -3305,6 +3307,7 @@ class Ventilator():
 				    print('BT error send Inhalation')
 			        send_last_time= time()
 			    sending_time=time() - send_last_time
+			peep_val_send = indiff
 		    EHold = '0'
 		    GPIO.output(33, GPIO.LOW)
  #                   print(exp_press_array)
@@ -4019,6 +4022,7 @@ class Ventilator():
 				    print('BT error send Inhalation')
 			        send_last_time= time()
 			    sending_time=time() - send_last_time
+			peep_val_send = indiff
 		    EHold = '0'
 		    GPIO.output(33, GPIO.LOW)
                     flag=0
@@ -4770,6 +4774,7 @@ class Ventilator():
 				    print('BT error send Inhalation')
 			        send_last_time= time()
 			    sending_time=time() - send_last_time
+			peep_val_send = indiff
 		    EHold = '0'
 		    GPIO.output(33, GPIO.LOW)
 #		    flow_for_peep = 0.25 * (min(exp_flow_array))
@@ -6675,6 +6680,7 @@ class Ventilator():
 				    print('BT error send Inhalation')
 			        send_last_time= time()
 			    sending_time=time() - send_last_time
+			peep_val_send = indiff
 		    EHold = '0'
 		    GPIO.output(33, GPIO.LOW)
  #                   print(flow_for_peep)
@@ -9172,6 +9178,7 @@ class Ventilator():
 				    print('BT error send Inhalation')
 			        send_last_time= time()
 			    sending_time=time() - send_last_time
+			peep_val_send = indiff
 		    EHold = '0'
 		    GPIO.output(33, GPIO.LOW)
 #		    flow_for_peep = 0.25 * (min(exp_flow_array))
@@ -9930,6 +9937,7 @@ class Ventilator():
 				    print('BT error send Inhalation')
 			        send_last_time= time()
 			    sending_time=time() - send_last_time
+			peep_val_send = indiff
 		    EHold = '0'
 		    GPIO.output(33, GPIO.LOW)
                     flag=0
