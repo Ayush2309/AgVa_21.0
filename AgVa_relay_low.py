@@ -1236,7 +1236,7 @@ class Ventilator():
 			    if(sending_time > 0.02):
 			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
 			        try:
-				    ser.write(packet_inhalation)
+				    ser.write(packet_exhalation)
 			        except:
 				    print('BT error send Inhalation')
 			        send_last_time= time()
@@ -2516,7 +2516,7 @@ class Ventilator():
 			    if(sending_time > 0.02):
 			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
 			        try:
-				    ser.write(packet_inhalation)
+				    ser.write(packet_exhalation)
 			        except:
 				    print('BT error send Inhalation')
 			        send_last_time= time()
@@ -3171,7 +3171,7 @@ class Ventilator():
 			    if(sending_time > 0.02):
 			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
 			        try:
-				    ser.write(packet_inhalation)
+				    ser.write(packet_exhalation)
 			        except:
 				    print('BT error send Inhalation')
 			        send_last_time= time()
@@ -3842,7 +3842,7 @@ class Ventilator():
 			    if(sending_time > 0.02):
 			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
 			        try:
-				    ser.write(packet_inhalation)
+				    ser.write(packet_exhalation)
 			        except:
 				    print('BT error send Inhalation')
 			        send_last_time= time()
@@ -4550,7 +4550,7 @@ class Ventilator():
 			    if(sending_time > 0.02):
 			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
 			        try:
-				    ser.write(packet_inhalation)
+				    ser.write(packet_exhalation)
 			        except:
 				    print('BT error send Inhalation')
 			        send_last_time= time()
@@ -6412,7 +6412,7 @@ class Ventilator():
 			    if(sending_time > 0.02):
 			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
 			        try:
-				    ser.write(packet_inhalation)
+				    ser.write(packet_exhalation)
 			        except:
 				    print('BT error send Inhalation')
 			        send_last_time= time()
@@ -8866,7 +8866,7 @@ class Ventilator():
 			    if(sending_time > 0.02):
 			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
 			        try:
-				    ser.write(packet_inhalation)
+				    ser.write(packet_exhalation)
 			        except:
 				    print('BT error send Inhalation')
 			        send_last_time= time()
@@ -9579,7 +9579,7 @@ class Ventilator():
 			    if(sending_time > 0.02):
 			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
 			        try:
-				    ser.write(packet_inhalation)
+				    ser.write(packet_exhalation)
 			        except:
 				    print('BT error send Inhalation')
 			        send_last_time= time()
