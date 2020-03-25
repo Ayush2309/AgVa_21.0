@@ -2088,6 +2088,7 @@ class Ventilator():
 		    pump_pressure_now = pump_pressure
 		    inhale_loop = "1"
 		    del inhale_array[:]
+		    GPIO.output(33, GPIO.LOW)
 		    volume  = 0
 		    peep_val_send =  temp_peep
  		    if(len(exp_press_array) > 10):
@@ -2225,6 +2226,27 @@ class Ventilator():
 			VTi_volume = max(volume,VTi_volume)
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
+		    if(IHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("entering inspiratory hold")
+			print(IH_time)
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < IH_time):
+			    print(sending_time)
+			    indiff= self.ABP_pressure()
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_inhalation =('A@' + str(round(indiff,2)) + ','+str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(trigger) + '#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    IHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 		    if(indiff >= (P_plat+3)):
 			pressure_count = pressure_count +1
 			if(pressure_count >= 3):
@@ -2264,9 +2286,9 @@ class Ventilator():
 			sol.ChangeDutyCycle(0)
 		    if(toggle_switch == "1"):
 			print("got in the 2nd statement")
-			GPIO.output(35, GPIO.HIGH)
-		        motor_1.ChangeDutyCycle(0)
-			sol.ChangeDutyCycle(100)
+		#	GPIO.output(35, GPIO.HIGH)
+		        motor_1.ChangeDutyCycle(peep)
+			sol.ChangeDutyCycle(0)
 		    try:
 		        Pmean= sum(Pmean_array)/len(Pmean_array)
 		    except:
@@ -2424,6 +2446,9 @@ class Ventilator():
 #			print('packet exhalation size  is')
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
+		    if(toggle_switch == "1" and indiff <= peep_val):
+                        sol.ChangeDutyCycle(100)
+			sleep(0.1)
 #			print('packet_exhal;ation conatins is')
 #			print(packet_exhalation)
                     temp_peep = self.ABP_pressure()
@@ -2432,9 +2457,9 @@ class Ventilator():
 		    time_elapsed_exhale_flow  = 0
                     diff=self.SDP_pressure()
 		    start_time=current_time
-		    if(toggle_switch == "1" and volFlow_rate <= (volume_peak_exhale * 0.05) and indiff <= peep_val):
+		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-#			sleep(0.3)
+			sleep(0.1)
 		    sending_time=200
 		    send_last_time = 0
 		    sol_flag  = 0
@@ -2445,10 +2470,10 @@ class Ventilator():
                         indiff = self.ABP_pressure()
                         exp_press_array.append(indiff)			
 			#indiff = self.ABP_pressure()
-			if(toggle_switch == "1" and sol_flag  == 0 and volFlow_rate <= (volume_peak_exhale*0.05) and indiff <= peep_val):
+			if(toggle_switch == "1" and sol_flag  == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    sol_flag = 1
-	#		    sleep(0.3)
+			    sleep(0.1)
 			if(SDP_flag == 0):
            		    volume=self.Flow()
 			    volFlow_rate=self.rate()
@@ -2472,6 +2497,26 @@ class Ventilator():
                    # peep_array_index = exp_flow_array.index(value1)
 #                    peep_val_send = exp_press_array[peep_array_index]			
 		 #   peep_val_send = temp_peep
+		    if(EHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("Entering expiratory hold")
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < EH_time):
+			    indiff= self.ABP_pressure()
+			    print(time() - instant_time)
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    EHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 		    flag=0
 		    loop = 1
 		    inhale_loop = "1"
@@ -2634,6 +2679,7 @@ class Ventilator():
                 if((current_time-start_time)>cycle_time):
 		    pump_pressure_now = pump_pressure
 		    inhale_loop = "1"
+		    GPIO.output(33, GPIO.LOW)
 		    volume = 0
 		    del inhale_array[:]
 		    GPIO.output(35, GPIO.LOW)
@@ -2777,6 +2823,27 @@ class Ventilator():
 			VTi_volume = max(volume,VTi_volume)
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
+		    if(IHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("entering inspiratory hold")
+			print(IH_time)
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < IH_time):
+			    print(sending_time)
+			    indiff= self.ABP_pressure()
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_inhalation =('A@' + str(round(indiff,2)) + ','+str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(trigger) + '#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    IHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 		    if(indiff >= (PIP+2)):
 			pressure_count = pressure_count +1
 			if(pressure_count >= 3):
@@ -2825,10 +2892,10 @@ class Ventilator():
 		        motor_1.ChangeDutyCycle(peep_open)
 			sol.ChangeDutyCycle(0)
 		    if(toggle_switch == "1"):
-			GPIO.output(35, GPIO.HIGH)
+			#GPIO.output(35, GPIO.HIGH)
 #			print("got in the 2nd statement")
-		        motor_1.ChangeDutyCycle(0)
-			sol.ChangeDutyCycle(100)
+		        motor_1.ChangeDutyCycle(peep)
+			sol.ChangeDutyCycle(0)
 		    inhale_array_length = len(inhale_array)
 		    if(inhale_array_length % 2 != 0):
 			inhale_array.append(0)
@@ -3034,6 +3101,9 @@ class Ventilator():
 				print('BT exhalation error')
 			    send_last_time = time()
 			sending_time = w- send_last_time
+		        if(toggle_switch == "1" and indiff <= peep_val):
+                            sol.ChangeDutyCycle(100)
+			    sleep(0.1)
 #			print('packet exhalation size  is')
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
@@ -3042,9 +3112,9 @@ class Ventilator():
                     temp_peep = self.ABP_pressure()
                     new_time=time()
                     time_elapsed_exhale=0.0
-		    if(toggle_switch == "1" and volFlow_rate <= (volume_peak_exhale * 0.05) and indiff <= peep_val):
+		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-#			sleep(0.3)
+			sleep(0.1)
                     diff=self.SDP_pressure()
 		    start_time=current_time
 		    time_elapsed_exhale_flow = 0
@@ -3057,10 +3127,10 @@ class Ventilator():
  #                       exp_flow_array.append(exp_flow)
 			indiff = self.ABP_pressure()
 			exp_press_array.append(indiff)
-		        if(toggle_switch == "1" and sol_flag == 0 and  volFlow_rate <= (volume_peak_exhale * 0.05) and indiff <= peep_val):
+		        if(toggle_switch == "1" and sol_flag == 0 and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    sol_flag = 1
-	#		    sleep(0.3)
+			    sleep(0.1)
 			if(SDP_flag == 0):
            		    volume=self.Flow()
 			    volFlow_rate=self.rate()
@@ -3079,6 +3149,26 @@ class Ventilator():
                         start_time=current_time
                     #    print(start_time)
 #		    flow_for_peep = 0.25 * (min(exp_flow_array))
+		    if(EHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("Entering expiratory hold")
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < EH_time):
+			    indiff= self.ABP_pressure()
+			    print(time() - instant_time)
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    EHold = '0'
+		    GPIO.output(33, GPIO.LOW)
  #                   print(exp_press_array)
   #                  value1 = find_nearest(exp_flow_array , flow_for_peep)
    #                 peep_array_index = exp_flow_array.index(value1)
@@ -3210,6 +3300,7 @@ class Ventilator():
 		prev_mode = 13
 		ABP_flag = 0
 		print('we are in PSV mode')
+		hold_check()
 		data= self.read_data()
 		print('mode is')
 		print(data)
@@ -3261,6 +3352,7 @@ class Ventilator():
                 if(flow>trigflow_comp or (current_time-start_time)>cycle_time):
 		    RR_time=current_time-start_time
 		    pump_pressure_now = pump_pressure
+		    GPIO.output(33, GPIO.LOW)
 		    GPIO.output(35, GPIO.LOW)
 		    patient_trigger_flow = flow
 		    leak_comp_flag = leak_comp()
@@ -3447,6 +3539,27 @@ class Ventilator():
 			VTi_volume = max(volume,VTi_volume)
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
+		    if(IHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("entering inspiratory hold")
+			print(IH_time)
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < IH_time):
+			    print(sending_time)
+			    indiff= self.ABP_pressure()
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_inhalation =('A@' + str(round(indiff,2)) + ','+str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(trigger) + '#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    IHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 		    if(indiff >= (P_plat+3)):
 			pressure_count = pressure_count +1
 			if(pressure_count >= 3):
@@ -3489,9 +3602,9 @@ class Ventilator():
 			sol.ChangeDutyCycle(0)
 		    if(toggle_switch == "1"):
 			print("got in the 2nd statement")
-			GPIO.output(35, GPIO.HIGH)
-		        motor_1.ChangeDutyCycle(0)
-			sol.ChangeDutyCycle(100)
+		#	GPIO.output(35, GPIO.HIGH)
+		        motor_1.ChangeDutyCycle(peep)
+			sol.ChangeDutyCycle(0)
 		    inhale_array_length = len(inhale_array)
 		    if(inhale_array_length % 2 != 0):
 			inhale_array.append(0)
@@ -3656,6 +3769,9 @@ class Ventilator():
 				print('BT exhalation error')
 			    send_last_time = time()
 			sending_time = w- send_last_time
+		        if(toggle_switch == "1" and indiff <= peep_val):
+                            sol.ChangeDutyCycle(100)
+			    sleep(0.1)
 #			print('packet exhalation size  is')
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
@@ -3665,9 +3781,9 @@ class Ventilator():
 #
                     new_time=time()
                     time_elapsed_exhale=0.0
-		    if(toggle_switch == "1" and volFlow_rate <= (volume_peak_exhale * 0.05) and indiff <= peep_val):
+		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-	#		sleep(0.3)
+			sleep(0.1)
                     diff=self.SDP_pressure()
 		    start_time=current_time
 		    sending_time=200
@@ -3685,10 +3801,10 @@ class Ventilator():
            		    volume=self.Flow()
 			    volFlow_rate=self.rate()
 			    diff = self.SDP_pressure()
-		        if(toggle_switch == "1" and sol_flag  == 0 and volFlow_rate <= (volume_peak_exhale * 0.05) and indiff <= peep_val):
+		        if(toggle_switch == "1" and sol_flag  == 0 and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    sol_flag  = 1
-		#	    sleep(0.3)
+			    sleep(0.1)
  			if(volFlow_rate < -5):
  			    time_elapsed_exhale_flow = time_elapsed_exhale
 			volume_peak_exhale=min(volume_peak_exhale,volFlow_rate)
@@ -3702,6 +3818,26 @@ class Ventilator():
 			sending_time =time() - send_last_time 
                         start_time=current_time
                     #    print(start_time)
+		    if(EHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("Entering expiratory hold")
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < EH_time):
+			    indiff= self.ABP_pressure()
+			    print(time() - instant_time)
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    EHold = '0'
+		    GPIO.output(33, GPIO.LOW)
                     flag=0
 #		    flow_for_peep = 0.25 * (min(exp_flow_array))
 #                    print(flow_for_peep)
@@ -3890,6 +4026,7 @@ class Ventilator():
 		    pump_pressure_now = pump_pressure
 		    patient_trigger_flow = flow
 		    inhale_loop = "1"
+		    GPIO.output(33, GPIO.LOW)
 		    del inhale_array[:]
 		    volume = 0
 		    leak_comp_flag = leak_comp()
@@ -4050,6 +4187,27 @@ class Ventilator():
 			VTi_volume = max(volume,VTi_volume)
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
+		    if(IHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("entering inspiratory hold")
+			print(IH_time)
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < IH_time):
+			    print(sending_time)
+			    indiff= self.ABP_pressure()
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_inhalation =('A@' + str(round(indiff,2)) + ','+str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(trigger) + '#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    IHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 		    if(indiff >= (PIP+2)):
 			pressure_count = pressure_count +1
 			if(pressure_count >= 3):
@@ -4100,9 +4258,9 @@ class Ventilator():
 			sol.ChangeDutyCycle(0)
 		    if(toggle_switch == "1"):
 			print("got in the 2nd statement")
-			GPIO.output(35, GPIO.HIGH)
-		        motor_1.ChangeDutyCycle(0)
-			sol.ChangeDutyCycle(100)
+			#GPIO.output(35, GPIO.HIGH)
+		        motor_1.ChangeDutyCycle(peep)
+			sol.ChangeDutyCycle(0)
 	#		sleep(0.01)
 	#		GPIO.output(21, GPIO.HIGH)
 		    inhale_array_length = len(inhale_array)
@@ -4317,14 +4475,17 @@ class Ventilator():
 				print('BT exhalation error')
 			    send_last_time = time()
 			sending_time = w- send_last_time
+		        if(toggle_switch == "1" and indiff <= peep_val):
+                            sol.ChangeDutyCycle(100)
+			    sleep(0.1)
 #			print('packet exhalation size  is')
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
 			print('packet_exhal;ation conatins is')
 			print(packet_exhalation)
-		    if(toggle_switch == "1" and volFlow_rate <= (volume_peak_exhale * 0.05) and indiff <= peep_val):
+		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-#			sleep(0.3)
+			sleep(0.1)
 		    temp_peep = self.ABP_pressure()
 #
                     new_time=time()
@@ -4341,10 +4502,10 @@ class Ventilator():
   #                      exp_flow_array.append(exp_flow)
 			indiff = self.ABP_pressure()
 			exp_press_array.append(indiff)
-			if(toggle_switch == "1" and sol_flag == 0 and volFlow_rate <= (volume_peak_exhale*0.05) and indiff <= peep_val):
+			if(toggle_switch == "1" and sol_flag == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    sol_flag  = 1
-	#		    sleep(0.3)
+			    sleep(0.1)
 			if(SDP_flag == 0):
            		    volume=self.Flow()
 			    diff = self.SDP_pressure()
@@ -4362,6 +4523,26 @@ class Ventilator():
 			sending_time =time() - send_last_time 
                         start_time=current_time
                     #    print(start_time)
+		    if(EHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("Entering expiratory hold")
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < EH_time):
+			    indiff= self.ABP_pressure()
+			    print(time() - instant_time)
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    EHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 #		    flow_for_peep = 0.25 * (min(exp_flow_array))
  #                   print(flow_for_peep)
   #                  value1 = find_nearest(exp_flow_array , flow_for_peep)
@@ -5695,6 +5876,7 @@ class Ventilator():
 		    pump_pressure_now = pump_pressure
 		    patient_trigger_flow = flow
 		    inhale_loop = "1"
+		    GPIO.output(33, GPIO.LOW)
 		    del inhale_array[:]
 		    leak_comp_flag = leak_comp()
 		    volume = 0
@@ -5856,6 +6038,27 @@ class Ventilator():
 			VTi_volume = max(volume,VTi_volume)
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
+		    if(IHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("entering inspiratory hold")
+			print(IH_time)
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < IH_time):
+			    print(sending_time)
+			    indiff= self.ABP_pressure()
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_inhalation =('A@' + str(round(indiff,2)) + ','+str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(trigger) + '#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    IHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 		    if(indiff >= (PIP+2)):
 			pressure_count = pressure_count +1
 			if(pressure_count >= 3):
@@ -5906,9 +6109,9 @@ class Ventilator():
 			sol.ChangeDutyCycle(0)
 		    if(toggle_switch == "1"):
 #			print("got in the 2nd statement")
-			GPIO.output(35, GPIO.HIGH)
-		        motor_1.ChangeDutyCycle(0)
-			sol.ChangeDutyCycle(100)
+		#	GPIO.output(35, GPIO.HIGH)
+		        motor_1.ChangeDutyCycle(peep)
+			sol.ChangeDutyCycle(0)
 	#		sleep(0.01)
 	#		GPIO.output(21, GPIO.HIGH)
 		    inhale_array_length = len(inhale_array)
@@ -6132,10 +6335,14 @@ class Ventilator():
 			print('ratio time toggle  break ' + str(ratio) +  ",," + str(time_elap) + "," + str(toggle_switch) + "," + str(exhale_break))
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
+		        if(toggle_switch == "1" and indiff <= peep_val):
+                            sol.ChangeDutyCycle(100)
+			    sleep(0.1)
 #			print('packet_exhal;ation conatins is')
 #			print(packet_exhalation)
-		    if(toggle_switch == "1" and volFlow_rate <= (volume_peak_exhale * 0.05) and indiff <= peep_val):
+		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
+			sleep(0.1)
 #		    print("----------------------" + str(peep))
 		    temp_peep = self.ABP_pressure()
 #
@@ -6153,10 +6360,10 @@ class Ventilator():
  #                       exp_flow_array.append(exp_flow)
 			indiff = self.ABP_pressure()
 			exp_press_array.append(indiff)
-			if(toggle_switch == "1" and sol_flag == 0 and volFlow_rate <= (volume_peak_exhale*0.05) and indiff <= peep_val):
+			if(toggle_switch == "1" and sol_flag == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    sol_flag = 1
-	#		    sleep(0.3)
+			    sleep(0.1)
 			if(SDP_flag == 0):
            		    volume=self.Flow()
 			    diff = self.SDP_pressure()
@@ -6175,6 +6382,26 @@ class Ventilator():
                         start_time=current_time
                     #    print(start_time)
 #		    flow_for_peep = 0.25 * (min(exp_flow_array))
+		    if(EHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("Entering expiratory hold")
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < EH_time):
+			    indiff= self.ABP_pressure()
+			    print(time() - instant_time)
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    EHold = '0'
+		    GPIO.output(33, GPIO.LOW)
  #                   print(flow_for_peep)
   #                  value1 = find_nearest(exp_flow_array , flow_for_peep)
    #                 peep_array_index = exp_flow_array.index(value1)
@@ -8108,6 +8335,7 @@ class Ventilator():
 		    RR_time=current_time-start_time
 		    inhale_loop = "1"
 		    volume = 0
+		    GPIO.output(33, GPIO.LOW)
 		    patient_trigger_flow = flow
 		    del inhale_array[:]
 		    leak_comp_flag = leak_comp()
@@ -8269,6 +8497,27 @@ class Ventilator():
 			VTi_volume = max(volume,VTi_volume)
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
+		    if(IHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("entering inspiratory hold")
+			print(IH_time)
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < IH_time):
+			    print(sending_time)
+			    indiff= self.ABP_pressure()
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_inhalation =('A@' + str(round(indiff,2)) + ','+str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(trigger) + '#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    IHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 		    if(indiff >= (PIP+2)):
 			pressure_count = pressure_count +1
 			if(pressure_count >= 3):
@@ -8319,9 +8568,9 @@ class Ventilator():
 			sol.ChangeDutyCycle(0)
 		    if(toggle_switch == "1"):
 			print("got in the 2nd statement")
-			GPIO.output(35, GPIO.HIGH)
-		        motor_1.ChangeDutyCycle(0)
-			sol.ChangeDutyCycle(100)
+		#	GPIO.output(35, GPIO.HIGH)
+		        motor_1.ChangeDutyCycle(peep)
+			sol.ChangeDutyCycle(0)
 	#		sleep(0.01)
 	#		GPIO.output(21, GPIO.HIGH)
 		    inhale_array_length = len(inhale_array)
@@ -8536,13 +8785,17 @@ class Ventilator():
 				print('BT exhalation error')
 			    send_last_time = time()
 			sending_time = w- send_last_time
+		        if(toggle_switch == "1" and indiff <= peep_val):
+                            sol.ChangeDutyCycle(100)
+			    sleep(0.1)
 #			print('packet exhalation size  is')
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
 			print('packet_exhal;ation conatins is')
 			print(packet_exhalation)
-		    if(toggle_switch == "1" and volFlow_rate <= (volume_peak_exhale * 0.05) and indiff <= peep_val):
+		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
+			sleep(0.1)
 		    print("------------------------------------" + str(peep))
 		    temp_peep = self.ABP_pressure()
                     new_time=time()
@@ -8559,10 +8812,10 @@ class Ventilator():
  #                       exp_flow_array.append(exp_flow)
 			indiff = self.ABP_pressure()
 			exp_press_array.append(indiff)
-			if(toggle_switch == "1" and sol_flag  == 0 and volFlow_rate <= (volume_peak_exhale*0.05) and indiff <= peep_val):
+			if(toggle_switch == "1" and sol_flag  == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    sol_flag  =  1
-	#		    sleep(0.3)
+			    sleep(0.1)
 			if(SDP_flag == 0):
            		    volume=self.Flow()
 			    diff = self.SDP_pressure()
@@ -8580,6 +8833,26 @@ class Ventilator():
 			sending_time =time() - send_last_time 
                         start_time=current_time
                     #    print(start_time)
+		    if(EHold == '1'):
+			GPIO.output(33, GPIO.HIGH)
+			print("Entering expiratory hold")
+			instant_time = time()
+		        sending_time = 0.2
+		        send_last_time=0
+			while(time() - instant_time < EH_time):
+			    indiff= self.ABP_pressure()
+			    print(time() - instant_time)
+			    volFlow_rate=self.rate()
+			    if(sending_time > 0.02):
+			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
+		    EHold = '0'
+		    GPIO.output(33, GPIO.LOW)
 #		    flow_for_peep = 0.25 * (min(exp_flow_array))
  #                   print(flow_for_peep)
   #                  value1 = find_nearest(exp_flow_array , flow_for_peep)
