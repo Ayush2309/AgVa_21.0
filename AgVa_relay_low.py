@@ -932,6 +932,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
+			ser.write("ACK66")
 			instant_time = time()
 		        sending_time = 0.2
 		        send_last_time=0
@@ -1227,6 +1228,7 @@ class Ventilator():
 			instant_time = time()
 		        sending_time = 0.2
 		        send_last_time=0
+			ser.write("ACK67")
 			while(time() - instant_time < EH_time):
 			    indiff= self.ABP_pressure()
 			    print(time() - instant_time)
@@ -2232,6 +2234,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
+			ser.write("ACK66")
 			instant_time = time()
 		        sending_time = 0.2
 		        send_last_time=0
@@ -2503,6 +2506,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("Entering expiratory hold")
 			instant_time = time()
+			ser.write("ACK67")
 		        sending_time = 0.2
 		        send_last_time=0
 			while(time() - instant_time < EH_time):
@@ -2830,6 +2834,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
+			ser.write("ACK66")
 			instant_time = time()
 		        sending_time = 0.2
 		        send_last_time=0
@@ -3156,6 +3161,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("Entering expiratory hold")
 			instant_time = time()
+			ser.write("ACK67")
 		        sending_time = 0.2
 		        send_last_time=0
 			while(time() - instant_time < EH_time):
@@ -3547,6 +3553,7 @@ class Ventilator():
 			print("entering inspiratory hold")
 			print(IH_time)
 			instant_time = time()
+			ser.write("ACK66")
 		        sending_time = 0.2
 		        send_last_time=0
 			while(time() - instant_time < IH_time):
@@ -3825,6 +3832,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("Entering expiratory hold")
 			instant_time = time()
+			ser.write("ACK67")
 		        sending_time = 0.2
 		        send_last_time=0
 			while(time() - instant_time < EH_time):
@@ -4195,6 +4203,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
+			ser.write("ACK66")
 			instant_time = time()
 		        sending_time = 0.2
 		        send_last_time=0
@@ -4531,6 +4540,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("Entering expiratory hold")
 			instant_time = time()
+			ser.write("ACK67")
 		        sending_time = 0.2
 		        send_last_time=0
 			while(time() - instant_time < EH_time):
@@ -6047,6 +6057,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
+			ser.write("ACK66")
 			instant_time = time()
 		        sending_time = 0.2
 		        send_last_time=0
@@ -6391,6 +6402,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("Entering expiratory hold")
 			instant_time = time()
+			ser.write("ACK67")
 		        sending_time = 0.2
 		        send_last_time=0
 			while(time() - instant_time < EH_time):
@@ -8508,6 +8520,7 @@ class Ventilator():
 			print("entering inspiratory hold")
 			print(IH_time)
 			instant_time = time()
+			ser.write("ACK66")
 		        sending_time = 0.2
 		        send_last_time=0
 			while(time() - instant_time < IH_time):
@@ -8843,6 +8856,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("Entering expiratory hold")
 			instant_time = time()
+			ser.write("ACK67")
 		        sending_time = 0.2
 		        send_last_time=0
 			while(time() - instant_time < EH_time):
@@ -9212,6 +9226,7 @@ class Ventilator():
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
+			ser.write("ACK66")
 			instant_time = time()
 		        sending_time = 0.2
 		        send_last_time=0
@@ -9553,6 +9568,7 @@ class Ventilator():
 		    if(EHold == '1'):
 			GPIO.output(33, GPIO.HIGH)
 			print("Entering expiratory hold")
+			ser.write("ACK67")
 			instant_time = time()
 		        sending_time = 0.2
 		        send_last_time=0
