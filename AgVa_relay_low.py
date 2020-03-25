@@ -1170,7 +1170,20 @@ class Ventilator():
 			sending_time = w- send_last_time
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = w- send_last_time
 #			print('packet exhalation size  is')
 #			print(volFlow_rate)
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
@@ -1185,7 +1198,22 @@ class Ventilator():
 		    start_time=current_time
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-			sleep(0.1)
+			holding_now = time()
+			holding_time = 0.2
+			sending_time = 2.0
+			send_last_time = 0
+			while( time() - holding_now <= holding_time):
+			    indiff = self.ABP_pressure()
+			    volFlow_rate = self.rate()
+			    volume=self.Flow()
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    if(sending_time > 0.02):
+			        try:
+				    ser.write(packet_exhalation)
+			    	except:
+				    print('BT exhalation error')
+			    	send_last_time = time()
+			    sending_time = time()- send_last_time
 #		    print("Time elapsed exhale  " + str(time_elapsed_exhale))
 #		    print("ABP                  " + str(indiff))
 #		    print("SDP                  " + str(diff))
@@ -1208,7 +1236,20 @@ class Ventilator():
 			    diff = self.SDP_pressure()
 			if(toggle_switch == "1" and sol_flag == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+			        sending_time = time()- send_last_time
 			    sol_flag = 1
  			if(volFlow_rate < -5):
  			    time_elapsed_exhale_flow = time_elapsed_exhale
@@ -2457,7 +2498,20 @@ class Ventilator():
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = w- send_last_time
 #			print('packet_exhal;ation conatins is')
 #			print(packet_exhalation)
                     temp_peep = self.ABP_pressure()
@@ -2468,7 +2522,22 @@ class Ventilator():
 		    start_time=current_time
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-			sleep(0.1)
+			holding_now = time()
+			holding_time = 0.2
+			sending_time = 2.0
+			send_last_time = 0
+			while( time() - holding_now <= holding_time):
+			    indiff = self.ABP_pressure()
+			    volFlow_rate = self.rate()
+			    volume=self.Flow()
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    if(sending_time > 0.02):
+			        try:
+				    ser.write(packet_exhalation)
+			    	except:
+				    print('BT exhalation error')
+			    	send_last_time = time()
+			    sending_time = time()- send_last_time
 		    sending_time=200
 		    send_last_time = 0
 		    sol_flag  = 0
@@ -2482,7 +2551,20 @@ class Ventilator():
 			if(toggle_switch == "1" and sol_flag  == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    sol_flag = 1
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = time()- send_last_time
 			if(SDP_flag == 0):
            		    volume=self.Flow()
 			    volFlow_rate=self.rate()
@@ -3117,7 +3199,20 @@ class Ventilator():
 			sending_time = w- send_last_time
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = w- send_last_time
 #			print('packet exhalation size  is')
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
@@ -3128,7 +3223,22 @@ class Ventilator():
                     time_elapsed_exhale=0.0
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-			sleep(0.1)
+			holding_now = time()
+			holding_time = 0.2
+			sending_time = 2.0
+			send_last_time = 0
+			while( time() - holding_now <= holding_time):
+			    indiff = self.ABP_pressure()
+			    volFlow_rate = self.rate()
+			    volume=self.Flow()
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    if(sending_time > 0.02):
+			        try:
+				    ser.write(packet_exhalation)
+			    	except:
+				    print('BT exhalation error')
+			    	send_last_time = time()
+			    sending_time = time()- send_last_time
                     diff=self.SDP_pressure()
 		    start_time=current_time
 		    time_elapsed_exhale_flow = 0
@@ -3144,7 +3254,20 @@ class Ventilator():
 		        if(toggle_switch == "1" and sol_flag == 0 and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    sol_flag = 1
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = time()- send_last_time
 			if(SDP_flag == 0):
            		    volume=self.Flow()
 			    volFlow_rate=self.rate()
@@ -3789,7 +3912,20 @@ class Ventilator():
 			sending_time = w- send_last_time
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = w- send_last_time
 #			print('packet exhalation size  is')
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
@@ -3801,7 +3937,22 @@ class Ventilator():
                     time_elapsed_exhale=0.0
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-			sleep(0.1)
+			holding_now = time()
+			holding_time = 0.2
+			sending_time = 2.0
+			send_last_time = 0
+			while( time() - holding_now <= holding_time):
+			    indiff = self.ABP_pressure()
+			    volFlow_rate = self.rate()
+			    volume=self.Flow()
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    if(sending_time > 0.02):
+			        try:
+				    ser.write(packet_exhalation)
+			    	except:
+				    print('BT exhalation error')
+			    	send_last_time = time()
+			    sending_time = time()- send_last_time
                     diff=self.SDP_pressure()
 		    start_time=current_time
 		    sending_time=200
@@ -3822,7 +3973,20 @@ class Ventilator():
 		        if(toggle_switch == "1" and sol_flag  == 0 and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    sol_flag  = 1
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = time()- send_last_time
  			if(volFlow_rate < -5):
  			    time_elapsed_exhale_flow = time_elapsed_exhale
 			volume_peak_exhale=min(volume_peak_exhale,volFlow_rate)
@@ -4500,7 +4664,20 @@ class Ventilator():
 			sending_time = w- send_last_time
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+			    sending_time = w- send_last_time
 #			print('packet exhalation size  is')
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
@@ -4508,7 +4685,22 @@ class Ventilator():
 			print(packet_exhalation)
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-			sleep(0.1)
+			holding_now = time()
+			holding_time = 0.2
+			sending_time = 2.0
+			send_last_time = 0
+			while( time() - holding_now <= holding_time):
+			    indiff = self.ABP_pressure()
+			    volFlow_rate = self.rate()
+			    volume=self.Flow()
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    if(sending_time > 0.02):
+			        try:
+				    ser.write(packet_exhalation)
+			    	except:
+				    print('BT exhalation error')
+			    	send_last_time = time()
+			    sending_time = time()- send_last_time
 		    temp_peep = self.ABP_pressure()
 #
                     new_time=time()
@@ -4528,7 +4720,20 @@ class Ventilator():
 			if(toggle_switch == "1" and sol_flag == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    sol_flag  = 1
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = time()- send_last_time
 			if(SDP_flag == 0):
            		    volume=self.Flow()
 			    diff = self.SDP_pressure()
@@ -6365,12 +6570,40 @@ class Ventilator():
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = w- send_last_time
 #			print('packet_exhal;ation conatins is')
 #			print(packet_exhalation)
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-			sleep(0.1)
+			holding_now = time()
+			holding_time = 0.2
+			sending_time = 2.0
+			send_last_time = 0
+			while( time() - holding_now <= holding_time):
+			    indiff = self.ABP_pressure()
+			    volFlow_rate = self.rate()
+			    volume=self.Flow()
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    if(sending_time > 0.02):
+			        try:
+				    ser.write(packet_exhalation)
+			    	except:
+				    print('BT exhalation error')
+			    	send_last_time = time()
+			    sending_time = time()- send_last_time
 #		    print("----------------------" + str(peep))
 		    temp_peep = self.ABP_pressure()
 #
@@ -6391,7 +6624,20 @@ class Ventilator():
 			if(toggle_switch == "1" and sol_flag == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    sol_flag = 1
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = time()- send_last_time
 			if(SDP_flag == 0):
            		    volume=self.Flow()
 			    diff = self.SDP_pressure()
@@ -8820,7 +9066,20 @@ class Ventilator():
 			sending_time = w- send_last_time
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = w- send_last_time
 #			print('packet exhalation size  is')
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
@@ -8828,7 +9087,22 @@ class Ventilator():
 			print(packet_exhalation)
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
-			sleep(0.1)
+			holding_now = time()
+			holding_time = 0.2
+			sending_time = 2.0
+			send_last_time = 0
+			while( time() - holding_now <= holding_time):
+			    indiff = self.ABP_pressure()
+			    volFlow_rate = self.rate()
+			    volume=self.Flow()
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    if(sending_time > 0.02):
+			        try:
+				    ser.write(packet_exhalation)
+			    	except:
+				    print('BT exhalation error')
+			    	send_last_time = time()
+			    sending_time = time()- send_last_time
 		    print("------------------------------------" + str(peep))
 		    temp_peep = self.ABP_pressure()
                     new_time=time()
@@ -8848,7 +9122,20 @@ class Ventilator():
 			if(toggle_switch == "1" and sol_flag  == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    sol_flag  =  1
-			    sleep(0.1)
+			    holding_now = time()
+			    holding_time = 0.2
+			    while( time() - holding_now <= holding_time):
+				indiff = self.ABP_pressure()
+			        volFlow_rate = self.rate()
+			        volume=self.Flow()
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				if(sending_time > 0.02):
+			    	    try:
+					ser.write(packet_exhalation)
+			    	    except:
+					print('BT exhalation error')
+			    	    send_last_time = time()
+				sending_time = time()- send_last_time
 			if(SDP_flag == 0):
            		    volume=self.Flow()
 			    diff = self.SDP_pressure()
