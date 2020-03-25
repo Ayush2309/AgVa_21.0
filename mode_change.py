@@ -64,7 +64,7 @@ while 1:
 	    x=ser.readline()
 	except:
 	    print('returned nothing')
-	if((x[0:3] == "IH" or x[0:3] == "EH"):
+	if(x[0:3] == "IH" or x[0:3] == "EH"):
 	    try:
 	        f = open("home/pi/AgVa_5.0/hold.txt","w")
 	        f.write(x)
