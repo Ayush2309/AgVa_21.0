@@ -2455,9 +2455,9 @@ class Ventilator():
 #			print('packet exhalation size  is')
 #			print((packet_exhalation))
 			volume_peak_exhale= min(volume_peak_exhale, volFlow_rate)
-		    if(toggle_switch == "1" and indiff <= peep_val):
-                        sol.ChangeDutyCycle(100)
-			sleep(0.1)
+		        if(toggle_switch == "1" and indiff <= peep_val):
+                            sol.ChangeDutyCycle(100)
+			    sleep(0.1)
 #			print('packet_exhal;ation conatins is')
 #			print(packet_exhalation)
                     temp_peep = self.ABP_pressure()
@@ -2490,7 +2490,7 @@ class Ventilator():
 			volume_peak_exhale=min(volume_peak_exhale,volFlow_rate)
  			if(volFlow_rate < -5):
  			    time_elapsed_exhale_flow = time_elapsed_exhale
-			packet_exhalation = ('C@' + str(int(indiff)) + ',' + str(int(volFlow_rate)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
+			packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(int(volFlow_rate)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
 			if(sending_time > 0.02):
 			    try:
 				ser.write(packet_exhalation)
