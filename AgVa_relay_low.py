@@ -202,6 +202,27 @@ def buzzer(position, bit):
             print('unable to write to file')
     except:
 	print('unable to read file')
+def hold_check():
+    global IHold,EHold, IH_time, EH_time
+    try:
+	f = open("/home/pi/AgVa_5.0/hold.txt")
+	data = f.readline()
+	f.close()
+	print(data[0:3])
+	if(data[0:2] == 'IH'):
+	    IHold = '1'
+	    IH_time = float(data[2:5])
+	elif(data[0:2] == 'EH'):
+	    EHold = '1'
+	    EH_time = float(data[2:5])
+	try:
+	    f = open("/home/pi/AgVa_5.0/hold.txt","w")
+	    f.write("x")
+	    f.close()
+	except:
+	    print("unable to write hold file")
+    except:
+	print("hold file doesnt exist")
 def find_nearest(array, value):
     array = np.asarray(array)
     idx = (np.abs(array - value)).argmin()
@@ -8649,7 +8670,8 @@ class Ventilator():
 		prev_mode = 26
 		print('we are in VCV mode')
 		data= self.read_data()
-		print(data)
+		hold_check()
+	#	print(data)
 		if(data == 1):
 		    print("breaking the cuircuit in hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
 		    break;
@@ -8863,20 +8885,23 @@ class Ventilator():
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
 		    if(IHold == '1'):
 			GPIO.output(33, GPIO.HIGH)
+			print("entering inspiratory hold")
+			print(IH_time)
 			instant_time = time()
 		        sending_time = 0.2
 		        send_last_time=0
 			while(time() - instant_time < IH_time):
+			    print(sending_time)
 			    indiff= self.ABP_pressure()
 			    volFlow_rate=self.rate()
-			if(sending_time > 0.02):
-			    packet_inhalation =('A@' + str(round(indiff,2)) + ','+str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(trigger) + '#')
-			    try:
-				ser.write(packet_inhalation)
-			    except:
-				print('BT error send Inhalation')
-			    send_last_time= time()
-			sending_time=time() - send_last_time
+			    if(sending_time > 0.02):
+			        packet_inhalation =('A@' + str(round(indiff,2)) + ','+str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(trigger) + '#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
 		    IHold = '0'
 		    GPIO.output(33, GPIO.LOW)
 		    if(indiff >= (PIP+2)):
@@ -9202,20 +9227,22 @@ class Ventilator():
 #                    peep_val_send = exp_press_array[peep_array_index]
 		    if(EHold == '1'):
 			GPIO.output(33, GPIO.HIGH)
+			print("Entering expiratory hold")
 			instant_time = time()
 		        sending_time = 0.2
 		        send_last_time=0
 			while(time() - instant_time < EH_time):
 			    indiff= self.ABP_pressure()
+			    print(time() - instant_time)
 			    volFlow_rate=self.rate()
-			if(sending_time > 0.02):
-			    packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
-			    try:
-				ser.write(packet_inhalation)
-			    except:
-				print('BT error send Inhalation')
-			    send_last_time= time()
-			sending_time=time() - send_last_time
+			    if(sending_time > 0.02):
+			        packet_exhalation = ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) + ',' + str(int(volume)) + ',' + str(int((TITOT)*100))+'#')
+			        try:
+				    ser.write(packet_inhalation)
+			        except:
+				    print('BT error send Inhalation')
+			        send_last_time= time()
+			    sending_time=time() - send_last_time
 		    EHold = '0'
 		    GPIO.output(33, GPIO.LOW)
                     flag=0
@@ -9262,7 +9289,7 @@ class Ventilator():
 		    MVe_array.append(volume)
 		    FiO2 = self.FiO2()
 #		    print('FiO2 is')
-#		    print(FiO2)
+		    hold_check()
 		    if(toggle_switch == '1'):
 		        time_elapsed_exhale = time_elapsed_exhale + 0.4
 			time_elapsed_exhale_flow = time_elapsed_exhale_flow + 0.4

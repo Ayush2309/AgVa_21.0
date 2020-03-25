@@ -64,16 +64,16 @@ while 1:
 	    x=ser.readline()
 	except:
 	    print('returned nothing')
-	if(x[0:3] == "IH" or x[0:3] == "EH"):
-	    try:
-	        f = open("home/pi/AgVa_5.0/hold.txt","w")
-	        f.write(x)
-		f.close()
-	    except:
-	   	print("unable to write to file")
+	if(x[0:2] == "IH" or x[0:2] == "EH"):
+	  #  try:
+	    f = open("/home/pi/AgVa_5.0/hold.txt","w")
+	    f.write(x)
+	    f.close()
+	   # except IOError:
+	   #	print("unable to write to file")
 	if(x == "BHOLD1"):
 	    try:
-	        f = open("home/pi/AgVa_5.0/BHOLD.txt","w")
+	        f = open("/home/pi/AgVa_5.0/BHOLD.txt","w")
 	        f.write("1")
 	        f.close()
 	    except:
