@@ -1176,7 +1176,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -1206,7 +1206,7 @@ class Ventilator():
 			    indiff = self.ABP_pressure()
 			    volFlow_rate = self.rate()
 			    volume=self.Flow()
-			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 			    if(sending_time > 0.02):
 			        try:
 				    ser.write(packet_exhalation)
@@ -1242,7 +1242,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -2505,7 +2505,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -2531,7 +2531,7 @@ class Ventilator():
 			    indiff = self.ABP_pressure()
 			    volFlow_rate = self.rate()
 			    volume=self.Flow()
-			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 			    if(sending_time > 0.02):
 			        try:
 				    ser.write(packet_exhalation)
@@ -2558,7 +2558,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -3207,7 +3207,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -3233,7 +3233,7 @@ class Ventilator():
 			    indiff = self.ABP_pressure()
 			    volFlow_rate = self.rate()
 			    volume=self.Flow()
-			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 			    if(sending_time > 0.02):
 			        try:
 				    ser.write(packet_exhalation)
@@ -3262,7 +3262,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -3921,7 +3921,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -3948,7 +3948,7 @@ class Ventilator():
 			    indiff = self.ABP_pressure()
 			    volFlow_rate = self.rate()
 			    volume=self.Flow()
-			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 			    if(sending_time > 0.02):
 			        try:
 				    ser.write(packet_exhalation)
@@ -3982,7 +3982,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -4674,7 +4674,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -4697,7 +4697,7 @@ class Ventilator():
 			    indiff = self.ABP_pressure()
 			    volFlow_rate = self.rate()
 			    volume=self.Flow()
-			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 			    if(sending_time > 0.02):
 			        try:
 				    ser.write(packet_exhalation)
@@ -4730,7 +4730,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -6581,7 +6581,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -6601,7 +6601,7 @@ class Ventilator():
 			    indiff = self.ABP_pressure()
 			    volFlow_rate = self.rate()
 			    volume=self.Flow()
-			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 			    if(sending_time > 0.02):
 			        try:
 				    ser.write(packet_exhalation)
@@ -6635,7 +6635,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -9078,7 +9078,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -9101,7 +9101,7 @@ class Ventilator():
 			    indiff = self.ABP_pressure()
 			    volFlow_rate = self.rate()
 			    volume=self.Flow()
-			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 			    if(sending_time > 0.02):
 			        try:
 				    ser.write(packet_exhalation)
@@ -9134,7 +9134,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -9830,7 +9830,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
@@ -9854,7 +9854,7 @@ class Ventilator():
 			    indiff = self.ABP_pressure()
 			    volFlow_rate = self.rate()
 			    volume=self.Flow()
-			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+			    packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 			    if(sending_time > 0.02):
 			        try:
 				    ser.write(packet_exhalation)
@@ -9887,7 +9887,7 @@ class Ventilator():
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
 			        volume=self.Flow()
-				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(volFlow_rate,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
+				packet_exhalation= ('C@' + str(round(indiff,2)) + ',' + str(round(0,2)) +',' + str(int(volume)) + ',' + str(int((TITOT)*100)) + '#')
 				if(sending_time > 0.02):
 			    	    try:
 					ser.write(packet_exhalation)
