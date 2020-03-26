@@ -929,7 +929,7 @@ class Ventilator():
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
 		    if(IHold == '1'):
-			motor_1.ChangeDutyCycle(peep)
+			motor_1.ChangeDutyCycle(pump_pressure)
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
@@ -2276,7 +2276,7 @@ class Ventilator():
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
 		    if(IHold == '1'):
-			motor_1.ChangeDutyCycle(peep)
+			motor_1.ChangeDutyCycle(pump_pressure)
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
@@ -2921,7 +2921,7 @@ class Ventilator():
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
 		    if(IHold == '1'):
-			motor_1.ChangeDutyCycle(peep)
+			motor_1.ChangeDutyCycle(pump_pressure)
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
@@ -3684,7 +3684,7 @@ class Ventilator():
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
 		    if(IHold == '1'):
-			motor_1.ChangeDutyCycle(peep)
+			motor_1.ChangeDutyCycle(pump_pressure)
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
@@ -4380,7 +4380,7 @@ class Ventilator():
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
 		    if(IHold == '1'):
-			motor_1.ChangeDutyCycle(peep)
+			motor_1.ChangeDutyCycle(pump_pressure)
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
@@ -6279,7 +6279,7 @@ class Ventilator():
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
 		    if(IHold == '1'):
-			motor_1.ChangeDutyCycle(peep)
+			motor_1.ChangeDutyCycle(pump_pressure)
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
@@ -8786,7 +8786,7 @@ class Ventilator():
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
 		    if(IHold == '1'):
-			motor_1.ChangeDutyCycle(peep)
+			motor_1.ChangeDutyCycle(pump_pressure)
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
@@ -9538,7 +9538,7 @@ class Ventilator():
 			peak_insp_pressure = max(peak_insp_pressure, indiff)
 			volume_peak_inhale=max(volume_peak_inhale,volFlow_rate)
 		    if(IHold == '1'):
-			motor_1.ChangeDutyCycle(peep)
+			motor_1.ChangeDutyCycle(pump_pressure)
 			GPIO.output(33, GPIO.HIGH)
 			print("entering inspiratory hold")
 			print(IH_time)
