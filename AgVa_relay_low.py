@@ -1172,7 +1172,7 @@ class Ventilator():
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -1200,7 +1200,7 @@ class Ventilator():
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
 			holding_now = time()
-			holding_time = 0.2
+			holding_time = 0.3
 			sending_time = 2.0
 			send_last_time = 0
 			while( time() - holding_now <= holding_time):
@@ -1238,7 +1238,7 @@ class Ventilator():
 			if(toggle_switch == "1" and sol_flag == 0 and indiff <= peep_val):
 			    sol.ChangeDutyCycle(100)
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -2502,7 +2502,7 @@ class Ventilator():
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -2526,7 +2526,7 @@ class Ventilator():
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
 			holding_now = time()
-			holding_time = 0.2
+			holding_time = 0.3
 			sending_time = 2.0
 			send_last_time = 0
 			while( time() - holding_now <= holding_time):
@@ -2555,7 +2555,7 @@ class Ventilator():
 			    sol.ChangeDutyCycle(100)
 			    sol_flag = 1
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -3205,7 +3205,7 @@ class Ventilator():
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -3229,7 +3229,7 @@ class Ventilator():
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
 			holding_now = time()
-			holding_time = 0.2
+			holding_time = 0.3
 			sending_time = 2.0
 			send_last_time = 0
 			while( time() - holding_now <= holding_time):
@@ -3260,7 +3260,7 @@ class Ventilator():
                             sol.ChangeDutyCycle(100)
 			    sol_flag = 1
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -3920,7 +3920,7 @@ class Ventilator():
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -3945,7 +3945,7 @@ class Ventilator():
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
 			holding_now = time()
-			holding_time = 0.2
+			holding_time = 0.3
 			sending_time = 2.0
 			send_last_time = 0
 			while( time() - holding_now <= holding_time):
@@ -3981,7 +3981,7 @@ class Ventilator():
                             sol.ChangeDutyCycle(100)
 			    sol_flag  = 1
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -4674,7 +4674,7 @@ class Ventilator():
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -4695,7 +4695,7 @@ class Ventilator():
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
 			holding_now = time()
-			holding_time = 0.2
+			holding_time = 0.3
 			sending_time = 2.0
 			send_last_time = 0
 			while( time() - holding_now <= holding_time):
@@ -4730,7 +4730,7 @@ class Ventilator():
 			    sol.ChangeDutyCycle(100)
 			    sol_flag  = 1
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -6582,7 +6582,7 @@ class Ventilator():
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -6600,7 +6600,7 @@ class Ventilator():
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
 			holding_now = time()
-			holding_time = 0.2
+			holding_time = 0.3
 			sending_time = 2.0
 			send_last_time = 0
 			while( time() - holding_now <= holding_time):
@@ -6636,7 +6636,7 @@ class Ventilator():
 			    sol.ChangeDutyCycle(100)
 			    sol_flag = 1
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -9080,7 +9080,7 @@ class Ventilator():
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -9101,7 +9101,7 @@ class Ventilator():
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
 			holding_now = time()
-			holding_time = 0.2
+			holding_time = 0.3
 			sending_time = 2.0
 			send_last_time = 0
 			while( time() - holding_now <= holding_time):
@@ -9136,7 +9136,7 @@ class Ventilator():
 			    sol.ChangeDutyCycle(100)
 			    sol_flag  =  1
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -9833,7 +9833,7 @@ class Ventilator():
 		        if(toggle_switch == "1" and indiff <= peep_val):
                             sol.ChangeDutyCycle(100)
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
@@ -9855,7 +9855,7 @@ class Ventilator():
 		    if(toggle_switch == "1" and indiff <= peep_val):
                         sol.ChangeDutyCycle(100)
 			holding_now = time()
-			holding_time = 0.2
+			holding_time = 0.3
 			sending_time = 2.0
 			send_last_time = 0
 			while( time() - holding_now <= holding_time):
@@ -9890,7 +9890,7 @@ class Ventilator():
 			    sol.ChangeDutyCycle(100)
 			    sol_flag  = 1
 			    holding_now = time()
-			    holding_time = 0.2
+			    holding_time = 0.3
 			    while( time() - holding_now <= holding_time):
 				indiff = self.ABP_pressure()
 			        volFlow_rate = self.rate()
